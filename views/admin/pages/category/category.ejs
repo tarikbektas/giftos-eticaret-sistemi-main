@@ -1,0 +1,43 @@
+<div class="content" style="width: 100%;margin: 10px 0 20px 50px;
+">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Katagori Yönetimi</h6>
+              <a class="btn btn-outline-success" href="add-category" role="button">Yeni Katagori ekle</a>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Başlık</th>
+                      <th>Açıklama</th>
+                      <th>#</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% category.forEach(function(categoryitem) { %>
+                    <tr>
+                          <td><%- categoryitem.name  %> </td>
+                          <td><input type="text" name="title" class="form-control" value="<%- categoryitem.desc  %>"></td>
+
+                          <td>
+                            <form action="delete-catagory" method="post">
+                                <input type="hidden" name="id" value="<%= categoryitem._id  %>">
+                                <button    type="submit" class="btn btn-danger">Sil</button>
+                            </form>
+                            
+                          </td>
+                       
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

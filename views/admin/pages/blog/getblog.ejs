@@ -1,0 +1,47 @@
+<div class="page-content">
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 grid-margin stdetch-card">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">Bloglar</h6>
+                <a class="btn btn-outline-success" href="add-blog" role="button">Yeni Blog Ekle</a>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Görsel</th>
+                     
+                        <th>Blog Başlığı</th>
+                        
+                        <th>Açıklama</th>
+                        
+                        <th>#</th>
+                      </tr>
+                    </thead>
+                    <% blog.forEach(function(blogitems) { %>
+                    <tbody>
+                  
+                      <td class="py-1"><img src="<%- blogitems.img  %>"></td>
+                      <td><%=blogitems.title  %></td>                
+                      <td><input type="text" name="desc" class="form-control" value="<%- blogitems.desc  %>"></td>
+                      <td>
+                        <form action="delete-blog" method="post">
+                            <input type="hidden" value="<%=blogitems._id  %>" name="id">
+                            <button class="btn btn-danger"> Sil</button>
+                        </form>
+                      </td>
+                     
+                    </tbody>
+                    <% }); %>
+                  </table>
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

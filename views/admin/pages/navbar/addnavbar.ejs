@@ -1,0 +1,144 @@
+<h1><%=navbar.title  %></h1>
+<div class="page-content">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">
+              </h6>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Sıra</th>
+                      <th>Başlık</th>
+                      <th>Türü</th>
+                      <th>#</th>
+                    </tr>
+                  </thead>
+                  <tbody style="font-size: 8pt">
+                    <% navbar.forEach(function(navbaritems) { %>
+                    <tr>
+                      <td><%=navbaritems.sira  %></td>
+                      <td><%=navbaritems.title  %></td>
+                      <td><%=navbaritems.type  %></td>
+                      <td>
+                        <form action="navbar-delete" method="post">
+                          <input type="hidden" name="id" value="<%=navbaritems._id  %>">
+                          <button type="submit" class="btn btn-danger">Sil</button>
+                        </form>
+                      </td>
+                    </tr>
+                    <% }); %>
+
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <br>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title"> </h6>
+          <div class="table-responsive">
+            <form action="navbar" method="post" class="forms-sample">
+
+              <div class="row mb-3">
+                <div class="col-sm-12" style="width: 90rem;">
+
+
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade  show active " id="pills-tr" role="tabpanel" aria-labelledby="pills-tr-tab">
+                      <label class="col-sm-3 col-form-label">Başlık</label>
+                      <input type="text" name="title" value="" class="form-control">
+                      <br>
+                      <label class="col-sm-3 col-form-label">Link</label>
+                      <input type="text" id="link" class="form-control" name="link" value="">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Türü</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="type" id="sectionSelector" onchange="showHideSections()" for="sectionSelector">
+                    <option value="tekli">Tekli Menü</option>
+                    <option value="sayfa">Sayfa Linki</option>
+                  </select>
+
+                </div>
+              </div>
+              <div class="row mb-3 ml-2">
+                <label class="col-sm-3 col-form-label">Sıra</label>
+                <div class="col-sm-9">
+                  <input type="number" required="" name="sira" class="form-control">
+                </div>
+              </div>
+
+              <section id="tekli">
+
+              </section>
+              <section id="sayfa">
+                <div class="row mb-3">
+                  <label class="col-sm-3 col-form-label">Bağ</label>
+                  <div class="col-sm-9 dynamic_select_area">
+                    <select  name="link2" class="form-control cat_list_item">
+                      <% pages.forEach(function(pagesitems) { %>
+                      <option value="pages/<%=pagesitems.url  %>"><%=pagesitems.title  %></option>
+                      <% }); %>
+                    </select>
+                  </div>
+                </div>
+              </section>
+
+              <button type="submit" class="btn btn-primary me-2">Kaydet</button>
+              <a class="btn btn-secondary" href="navbar">Geri</a>
+            </form>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // Sayfa yüklendiğinde çalışacak olan fonksiyon
+  document.addEventListener("DOMContentLoaded", function() {
+    // Tüm bölümleri gizle
+    var allSections = document.querySelectorAll("section");
+    allSections.forEach(function(section) {
+      section.style.display = "none";
+    });
+  });
+
+  function showHideSections() {
+    // Seçilen bölümü al
+    var selectedSection = document.getElementById("sectionSelector").value;
+
+    // Tüm bölümleri gizle
+    var allSections = document.querySelectorAll("section");
+    allSections.forEach(function(section) {
+      section.style.display = "none";
+    });
+
+    // Seçilen bölümü göster
+    var selectedSectionElement = document.getElementById(selectedSection);
+    if (selectedSectionElement) {
+      selectedSectionElement.style.display = "block";
+    }
+  }
+</script>

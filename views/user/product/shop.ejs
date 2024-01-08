@@ -1,0 +1,35 @@
+<section class="shop_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Latest Products
+      </h2>
+    </div>
+    <div class="row">
+        <% product.forEach(function(productitems) { %>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="box">
+          <a href="urunler/<%=productitems._id  %>">
+            <div class="img-box">
+              <img src="../admin/<%- productitems.urun_görsel  %>" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                <%=productitems.urun_adi  %>
+              </h6>
+              <h6>
+              Fiyat
+                <span>
+                    <%= productitems.urun_fiyat  %>₺
+                </span>
+              </h6>
+            </div>
+            
+          </a>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+   
+  </div>
+</section>

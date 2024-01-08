@@ -1,0 +1,11 @@
+<% if (passportFailure.length > 0) { %>
+    <div>
+      <p class="alert alert-danger"><%= passportFailure %></p>
+    </div>
+  <% } %>
+  
+  <% if (passportSuccess.length > 0) { %>
+    <div>
+      <p class="alert alert-primary"><%= passportSuccsess %></p>
+    </div>
+  <% } %>

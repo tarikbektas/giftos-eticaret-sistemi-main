@@ -1,0 +1,42 @@
+<div class="page-content" style="width: 100%;">
+    <div class="row">
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">Yeni Servis ekle</h6>
+            <form action="add-services" method="post" enctype="multipart/form-data" class="forms-sample">
+               <div class="row mb-3">
+                <div class="col-sm-12">
+  
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade  show active " id="pills-tr" role="tabpanel" aria-labelledby="pills-tr-tab">
+                      <label class="col-sm-3 col-form-label">Başlık</label>
+                      <input type="text" name="title" value="" class="form-control">
+                      <br>
+                      <label class="col-sm-3 col-form-label">Açıklama</label>
+                      <textarea name="editor1"></textarea>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Görsel</label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="file" name="image1">
+                </div>
+              </div>
+          </div>
+  
+          <button type="submit" class="btn btn-primary me-2">Ekle</button>
+          <a class="btn btn-secondary" href="/admin/services">Geri Dön</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <script>
+    CKEDITOR.replace('editor1');
+  </script>

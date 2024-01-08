@@ -1,0 +1,69 @@
+<%include('../message/flashmessage')  %>
+<header class="header_section">
+  <nav class="navbar navbar-expand-lg custom_nav-container ">
+    <a class="navbar-brand" href="index.html">
+      <img style="width: 3rem;" src="../admin/<%- setting.logo  %>" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class=""></span>
+    </button>
+
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <% navbar.forEach(function(navbaritems) { %>
+        <li class="nav-item">
+          <% if (navbaritems.url) { %>
+          <a class="nav-link" href="<%=navbaritems.url%>"><%=navbaritems.title%> <span class="sr-only">(current)</span></a>
+          <% } else if (navbaritems.url2) { %>
+          <a class="nav-link" href="/<%=navbaritems.url2%>"><%=navbaritems.title%> <span class="sr-only">(current)</span></a>
+          <% } else { %>
+          <!-- Eğer her ikisi de boşsa istediğiniz başka bir şey yapabilirsiniz -->
+          <span class="nav-link"><%=navbaritems.title%></span>
+          <% } %>
+         
+
+        </li>
+        <% }); %>
+         <%if(user){ %>
+        <a class="nav-link" href="/dashboard">Sepet <span class="sr-only">(current)</span></a>
+        <% } %>
+      </ul>
+      <%if(!user){ %>
+      <div class="user_option">
+        <a href="/login">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <span>
+            Login
+          </span>
+        </a>
+        <a href="">
+          <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+        </a>
+        <form class="form-inline ">
+          <button class="btn nav_search-btn" type="submit">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+      <% } %>
+      <%if(user){ %>
+
+      <div class="pull-right">
+        <ul class="nav pull-right">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%-user.name  %> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li>
+                <form action="/logout" method="POST">
+                  <button class="btn btn-primary btn-sm" type="submit">çıkış </button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <% } %>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,153 @@
+<div class="container"> 
+<div class="page-content">
+  <div class="row">
+<div class="col-md-12 grid-margin">
+<div class="card">
+<div class="card-body">
+  <h6 class="card-title">Sistem Ayarları</h6>
+  <p class="text-muted mb-3"></p>
+  <form action="setting" method="post" enctype="multipart/form-data" class="forms-sample">
+    <input type="hidden" name="_token" value="qzTDH1dpPefTyAXw5upNa7aWJLA0vzXZ2nCMyvQj"><div class="row">
+      <!-- <div class="col-md-3">
+        <label class="form-label">İletişim Mesajı E-posta Bildirimi</label>
+        <select name="contact_mail" class="form-control custom-select">
+            <option value="Evet" selected="">Gönderilsin</option>
+            <option value="Hayır">Gönderilmesin</option>
+        </select>
+      </div> -->
+      <% if (setting.bakim_modu == 1 ) { %>
+        <div class="col-md-3">
+          <label class="form-label">Bakım Modu</label>
+          <select name="is_live" class="form-control custom-select">
+              <option value="1"selected="" >Pasif</option>
+              <option value="0">Aktif</option>
+              <div class="col-md-6">
+                <label class="form-label">Site Kısa Açıklama:</label>
+                <input class="form-control" type="text" name="short_desc" value="<%=setting.short_desc  %>">
+              </div>
+          </select>
+        </div>
+        <%} else { %>
+          <div class="col-md-3">
+            <label class="form-label">Bakım Modu</label>
+            <select name="is_live" class="form-control custom-select">
+                <option value="1" >Pasif</option>
+                <option value="0"selected="">Aktif</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Site Kısa Açıklama:</label>
+            <input class="form-control" type="text" name="short_desc" value="<%=setting.short_desc  %>">
+          </div>
+        <% } %>
+   
+
+      <!-- <div class="col-md-3">
+        <label class="form-label">Site Varsayılan Dil</label>
+        <select name="default_language" class="form-control custom-select">
+                                  <option value="tr" selected="">Türkçe</option>
+                                  <option value="en">English</option>
+                            </select>
+      </div> -->
+    </div>
+    <hr>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Site Başlık</label>
+        <input class="form-control mb-4 mb-md-0" type="text" name="site_title" value="<%=setting.site_title  %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Site URL:</label>
+        <input class="form-control" type="text" name="site_url" value="<%=setting.site_url  %>">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Site Açıklaması</label>
+        <input class="form-control mb-4 mb-md-0" type="text" name="site_description" value="<%=setting.site_description %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Site Anahtar Kelimeleri</label>
+        <input class="form-control mb-4 mb-md-0" type="text" name="site_keywords" value="<%=setting.site_keywords %>">
+      </div>
+
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Iframe ID:</label>
+        <input class="form-control" type="text" name="iframe" value="<%=setting.iframe_id %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Whatsapp Telefon Numarası:</label>
+        <input class="form-control" type="text" name="whatsapp_phone" value="<%=setting.whastsapp_number %>">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Telefon Numarası:</label>
+        <input class="form-control" type="text" name="phone" value="<%=setting.phone %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Instagram Kullanıcı Adı:</label>
+        <input class="form-control" type="text" name="instagram_username" value="<%=setting.phone %>">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">İkinci Telefon Numarası:</label>
+        <input class="form-control" type="text" name="second_phone" value="<%=setting.second_phone %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Facebook Kullanıcı Adı:</label>
+        <input class="form-control" type="text" name="facebook_username" value="<%=setting.second_phone %>">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">E-Posta:</label>
+        <input class="form-control" type="text" name="email" value="<%=setting.email %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Twitter Kullanıcı Adı:</label>
+        <input class="form-control" type="text" name="twitter_username" value="<%=setting.twitter_username %>">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Adres:</label>
+        <input class="form-control" type="text" name="address" value="<%=setting.address %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Youtube Kullanıcı Adı:</label>
+        <input class="form-control" type="text" name="youtube_username" value="<%=setting.youtube_username %>">
+      </div>
+    </div>
+   
+    <hr>
+  
+    <div class="col-md-6">
+      
+      <div class="row mb-6">
+        <label class="form-label">Logo:</label>
+                          <img style="width: 20%;" src="<%=setting.logo %>" class="card-img-top">
+                        <input class="form-control" type="file" name="image1" style="padding-bottom: 5%;">
+      </div>
+      <div class="row mb-6">
+        <label class="form-label">Favicon:</label>
+                          <img style="width: 20%;" src="<%=setting.favicon %>" class="card-img-top">
+                        <input class="form-control" type="file" name="image2" style="padding-bottom: 5%;">
+      </div>
+    
+    </div>
+   
+    <hr>
+   
+    <button type="submit" class="btn btn-primary me-2">KAYDET</button>
+  </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>

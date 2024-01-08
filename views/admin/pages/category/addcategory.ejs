@@ -1,0 +1,40 @@
+<div class="page-content">
+  <div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Yeni kategori ekle</h6>
+          <form action="category" method="post"   class="forms-sample">
+          
+           
+            <div class="row mb-3">
+              <div class="col-sm-12">
+
+                <hr>
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade  show active " id="pills-tr" role="tabpanel" aria-labelledby="pills-tr-tab">
+                    <label class="col-sm-3 col-form-label">Adı</label>
+                    <input type="text" name="name" value="" class="form-control">
+                    <br>
+                    <label class="col-sm-3 col-form-label">Açıklama</label>
+                    <textarea name="desc"></textarea>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+           
+            <button type="submit" class="btn btn-primary me-2">Ekle</button>
+            <a class="btn btn-secondary" href="category">Geri Dön</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    CKEDITOR.replace('desc');
+  </script>

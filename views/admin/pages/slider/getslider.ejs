@@ -1,0 +1,58 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">Slayt Yönetimi</h6>
+            <a class="btn btn-outline-success" href="add-slider" role="button">Yeni slayt ekle</a>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Sıra</th>
+                    <th>Görsel</th>
+                   
+                    <th>Başlık</th>
+                    <th>Link</th>
+                    <th></th>
+                    <th>#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% slider.forEach(function(slideritems) { %>
+                  <tr>
+                  
+                        <td><%= slideritems.slider_sira  %></td>
+                        <td class="py-1"><img src="<%- slideritems.slider_img  %>"></td>
+                        <form action="https://www.tapunedir.com/admin/sliders_edit_form/26" method="POST" enctype="multipart/form-data" class="form-sample"></form>
+                        <input type="hidden" name="_token" value="VAwhB7QpMCBAczKBK0hTIbutPuMmFNVoPxZjcBoA"> <input type="hidden" name="_method" value="PATCH">
+                        <td><input type="text" name="title" class="form-control" value="<%= slideritems.slider_title  %>"></td>
+                        <td><input type="text" name="link" class="form-control" value="<%= slideritems.slider_link  %>"></td>
+     
+                        <td>
+                          <form action="deleteslider" method="post">
+                            <input type="hidden" name="id" value="<%- slideritems._id  %>">
+                            <button type="submit" class="btn btn-outline-danger btn-xs btn-flat show_confirm" data-toggle="tooltip">Sil</button>
+                          </form>
+    
+                        </td>
+                    
+               
+                  </tr>
+                  <% }); %>
+
+
+
+
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

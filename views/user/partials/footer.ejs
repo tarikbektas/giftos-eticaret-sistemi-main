@@ -1,0 +1,85 @@
+<section class="info_section  layout_padding2-top">
+  <div class="social_container">
+    <div class="social_box">
+      <a href="https://<%= setting.facebook_username  %>">
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+      </a>
+      <a href="https://<%= setting.twitter_username  %>">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a href="https://<%= setting.instagram_username  %>">
+        <i class="fa fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a href="https://<%= setting.youtube_username  %>">
+        <i class="fa fa-youtube" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+  <div class="info_container ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <h6>
+            Hakkımızda
+          </h6>
+          <p>
+            <%=setting.short_desc  %>
+          </p>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_form ">
+            <h5>
+              Newsletter
+            </h5>
+            <form action="#">
+              <input type="email" placeholder="Enter your email">
+              <button>
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <h6>
+            NEED HELP
+          </h6>
+          <p>
+           <%=setting.short_desc  %>
+          </p>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <h6>
+            CONTACT US
+          </h6>
+          <div class="info_link-box">
+            <a href="">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span> <%= setting.address  %> </span>
+            </a>
+            <a href="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span><%= setting.phone  %></span>
+            </a>
+            <a href="">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span> <%= setting.contact_mail  %></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- footer section -->
+
+  <!-- footer section -->
+
+</section>
+
+<footer class=" footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> WTB Bilişim
+        
+      </p>
+    </div>
+  </footer>

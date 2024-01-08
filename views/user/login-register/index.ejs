@@ -1,0 +1,31 @@
+<%- include('../partials/flashmessage') %>
+
+<% if(user){ %>
+    <div>Giriş Yapan Kullanıcı <h1><%=user.name  %></h1></div>
+
+<%  }%>
+
+
+
+
+
+
+
+<div class="card"> 
+    <h5 class="card-header">Kullanıcılar</h5>
+    <div class="card-body">
+        <% if (users) { %>
+            
+    <% } %>
+    <% if (users) { %>
+        <ul class="list-group">
+            <% users.forEach(function(users) { %>
+                 <li class="list-group-item"><%=users.name  %></li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+       <div class="alert alert-danger"> Kullanıcı yok</div>
+    <% } %>
+    </div>
+
+</div>

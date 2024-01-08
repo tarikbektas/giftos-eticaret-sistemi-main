@@ -1,0 +1,55 @@
+<div class="page-content" style="    margin: 50px 0 0 120px">
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Sayfa Yönetimi</h6>
+              <a class="btn btn-outline-success" href="/admin/add-pages" role="button">Yeni Sayfa Ekle</a>
+              <div class="table-responsive" style="width: 300%;">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+
+
+                      <th>Başlık</th>
+
+                      <th>Link</th>
+
+                      <th>#</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% pages.forEach(function(pagesitems) { %>
+                    <tr>
+                      
+                       
+                      <td><%= pagesitems.title  %></td>
+                      <td><input type="text" name="title" class="form-control" value="/<%= pagesitems.url  %>"></td>
+
+
+                      <td style="display: flex;">
+                        <a href="../pages/<%=pagesitems.url%>"> <button type="submit" class="btn btn-outline-danger btn-xs btn-flat show_confirm" style="margin-right: 1rem;" data-toggle="tooltip">Sayfayı Gör</button></a>
+
+                          <input type="hidden" name="id" value="<%= pagesitems._id %>"> 
+                         <a href="edit-pages/<%=pagesitems._id  %>"> <button type="submit" class="btn btn-outline-danger btn-xs btn-flat show_confirm" style="margin-right: 1rem;" data-toggle="tooltip">Düzenle</button></a>
+                       
+                        <form action="delete-pages" method="POST">
+                            <input type="hidden" name="id" value="<%= pagesitems._id  %>"> 
+                            <button type="submit" class="btn btn-outline-danger btn-xs btn-flat show_confirm ml-2" data-toggle="tooltip">Sil</button>
+                          </form>
+                      </td>
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="page-content" style="margin: auto; width: 100%;">
+  <div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Yeni Ürün Ekle</h6>
+          <form action="product" method="post" enctype="multipart/form-data" class="forms-sample">
+             <div class="row mb-3">
+              <div class="col-sm-12">
+               
+                <hr>
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade  show active " id="pills-tr" role="tabpanel" aria-labelledby="pills-tr-tab">
+                    <label class="col-sm-3 col-form-label">Ürün Adı</label>
+                    <input type="text" name="title" value="" class="form-control">
+                    <br>
+                    <label class="col-sm-3 col-form-label">Kısa Önizleme</label>
+                    <textarea name="short_desc"   ></textarea>
+
+                    <label class="col-sm-3 col-form-label">Açıklama</label>
+                    <textarea name="desc"   ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Barkod</label>
+              <div class="col-sm-9">
+                <input type="text" name="barcode" value="" class="form-control">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Kategori</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="category_id">
+                  <% category.forEach(function(categoryitem) { %>
+                    <% if (categoryitem.name !== "Banner Product Cat.") { %>
+                      <option value="<%=categoryitem._id %>">- <%=categoryitem.name %></option>
+                    <% } %>
+                  <% }); %>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Görsel</label>
+              <div class="col-sm-9">
+                <div style="display: flex;">
+                </div>
+                <input class="form-control" type="file" name="image1">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Fiyat</label>
+              <div class="col-sm-9">
+                <input type="number" name="price" class="form-control" value="">
+              </div>
+            </div>
+       
+             
+            <button type="submit" class="btn btn-primary me-2">Kaydet</button>
+            <a class="btn btn-secondary" href="product">Geri</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  CKEDITOR.replace('desc'); 
+</script>
+
+
+<script>
+  CKEDITOR.replace('short_desc');
+</script>
+
