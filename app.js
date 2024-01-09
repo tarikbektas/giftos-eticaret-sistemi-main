@@ -1,13 +1,19 @@
 const express = require('express')
+
 const app = express();
 const ejsLayouts = require('express-ejs-layouts')
 const bodyParser = require('body-parser')
+require('dotenv').config();
 app.use (bodyParser.urlencoded({extended:false}))
 const mongoose = require('mongoose');
-
+const PORT =process.env.PORT 
 // modeller
 const Setting =require('./models/settings')
 const Navbar =require('./models/navbar')
+
+
+
+console.log('port',PORT)
 
 
 const passport = require('passport')
@@ -104,6 +110,6 @@ app.use('/admin',adminrouter)
 app.use('/',userrouter)
 
 
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
     console.log("proje çalışıyor")
 })

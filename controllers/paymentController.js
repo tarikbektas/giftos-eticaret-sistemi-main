@@ -5,8 +5,8 @@ const Payment = require('../models/payment')
 
 
 var iyzipay = new Iyzipay({
-    apiKey: 'sandbox-KEtPghd7YXUc7KDQRE9uRiCaR6Q9wuNt',
-    secretKey: 'sandbox-L8qFU593dGMndxOW9X6HyaOdFMiD5i9I',
+    apiKey: process.env.apiKey ,
+    secretKey: process.env.secretKey,
     uri: 'https://sandbox-api.iyzipay.com'
 });
 
