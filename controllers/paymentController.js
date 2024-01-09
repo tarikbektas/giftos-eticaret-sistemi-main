@@ -1,6 +1,9 @@
 const Cart = require('../models/cart')
 const  Iyzipay = require('iyzipay');
 
+const Payment = require('../models/payment')
+
+
 var iyzipay = new Iyzipay({
     apiKey: 'sandbox-KEtPghd7YXUc7KDQRE9uRiCaR6Q9wuNt',
     secretKey: 'sandbox-L8qFU593dGMndxOW9X6HyaOdFMiD5i9I',
@@ -9,15 +12,17 @@ var iyzipay = new Iyzipay({
 
 
 module.exports.getPayment = (req,res) =>{
-
-    res.render('user/payment',{layout:'user/layouts/layout-payment'})
+   
+     
+     res.render('user/payment',{layout:'user/layouts/layout-payment'})
 }
 
 
 module.exports.postPayment =async (req,res) =>{
+    const ipAddress = req.socket.remoteAddress;
     const {address,state,zip_code,country,card_number,card_code,month,year,card_name} = req.body
     const user =req.user
-   
+    let username = user.name + '' + user.surname 
     Cart.findById(user.usercartid).populate({
         path: 'products',
         populate: {
@@ -63,33 +68,33 @@ module.exports.postPayment =async (req,res) =>{
             registerCard: '0'
         },
         buyer: {
-            id: 'BY789',
-            name: 'John',
-            surname: 'Doe',
-            gsmNumber: '+905350000000',
-            email: 'email@email.com',
-            identityNumber: '74300864791',
+            id: user.id,
+            name: user.name,
+            surname: user.surname,
+            gsmNumber: user.phone,
+            email: user.email,
+            identityNumber: user.id,
             lastLoginDate: '2015-10-05 12:43:35',
             registrationDate: '2013-04-21 15:12:09',
-            registrationAddress: 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1',
-            ip: '85.34.78.112',
-            city: 'Istanbul',
-            country: 'Turkey',
-            zipCode: '34732'
+            registrationAddress: address,
+            ip: ipAddress,
+            city: state,
+            country: country,
+            zipCode: zip_code
         },
         shippingAddress: {
-            contactName:user,
+            contactName:username,
             city: state,
             country:country,
             address: address,
             zipCode: zip_code
         },
         billingAddress: {
-            contactName: 'Jane Doe',
-            city: 'Istanbul',
-            country: 'Turkey',
-            address: 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1',
-            zipCode: '34742'
+            contactName: username,
+            city: state,
+            country: country,
+            address: address,
+            zipCode: zip_code
         },
         basketItems: basketItems
             
@@ -97,7 +102,10 @@ module.exports.postPayment =async (req,res) =>{
     
     iyzipay.payment.create(request, function (err, result) {
         console.log(err, result);
-     
+        if(result.status ==="success") {
+            console.log('başarılı ödeme')
+        }
+
     });
 
     });

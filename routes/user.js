@@ -18,8 +18,7 @@ function isLoggedIn(req, res, next) {
 }
 
 router.get('/',(req,res)=>{
-  const ipAddress = req.socket.remoteAddress;
-  res.locals.ipaddress = ipAddress
+
    Slider.find().sort({sira:1})
    .then(slider =>{
       res.render('user/index',{layout:'user/layouts/layout',slider:slider})
