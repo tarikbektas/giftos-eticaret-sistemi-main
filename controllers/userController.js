@@ -178,7 +178,7 @@ module.exports.dashboard = async (req, res) => {
   function calculateTotal(products) {
     return products.reduce((total, product) => total + product.urun_fiyat, 0);
   }
-  res.render('user/dashboard', {layout:'user/layouts/layout3',cart,total:total});
+  res.render('user/payment/dashboard', {layout:'user/layouts/layout3',cart,total:total});
   
 }
 

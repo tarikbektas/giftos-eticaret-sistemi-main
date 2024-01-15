@@ -7,13 +7,16 @@ require('dotenv').config();
 app.use (bodyParser.urlencoded({extended:false}))
 const mongoose = require('mongoose');
 const PORT =process.env.PORT 
+ 
+
+
 // modeller
 const Setting =require('./models/settings')
 const Navbar =require('./models/navbar')
 
 
 
-console.log('port',PORT)
+ 
 
 
 const passport = require('passport')
@@ -25,7 +28,7 @@ app.use(cookieParser("passporttutorial"));
 app.use(session({cookie:{maxAge:60000},
 resave:true,
 secret:"passporttutorial",
-saveUninitialized:true
+saveUninitialized:true,
 }))
 app.use(flash());
 

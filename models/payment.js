@@ -4,12 +4,13 @@ const Schema = mongoose.Schema
 
 
 const payment = new Schema({
-     sendData:{
-        type: String
-     },
-     getData:{
-        type:String
-     },
+   
+     sendData:[{
+        type: Object
+     }],
+     getData:[{
+        type:Object
+     }],
      createdAt: { type: Date, default: Date.now }
 
 })

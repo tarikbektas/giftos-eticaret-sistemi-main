@@ -51,7 +51,8 @@ router.get('/dashboard',isLoggedIn, userControler.dashboard);
 
 router.get('/payment',isLoggedIn,paymentController.getPayment)
 router.post('/payment',isLoggedIn,paymentController.postPayment)
-
+ 
+ 
 module.exports =router
 
  

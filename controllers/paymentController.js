@@ -1,8 +1,9 @@
 const Cart = require('../models/cart')
 const  Iyzipay = require('iyzipay');
+const crypto = require('crypto');
 
 const Payment = require('../models/payment')
-
+const Order = require('../models/order')
 
 var iyzipay = new Iyzipay({
     apiKey: process.env.apiKey ,
@@ -12,17 +13,25 @@ var iyzipay = new Iyzipay({
 
 
 module.exports.getPayment = (req,res) =>{
-   
-     
-     res.render('user/payment',{layout:'user/layouts/layout-payment'})
+     res.render('user/payment/payment',{layout:'user/layouts/layout-payment'})
 }
 
 
 module.exports.postPayment =async (req,res) =>{
+    function generateRandomNumber() {
+        const randomValue = crypto.randomBytes(5).toString('hex');
+        const randomNumber = parseInt(randomValue, 16);
+        const conversationId = randomNumber % 10000000000;  
+        return conversationId.toString().padStart(10, '0');  
+      }
+      
+      const conversationId = generateRandomNumber();
+      
     const ipAddress = req.socket.remoteAddress;
     const {address,state,zip_code,country,card_number,card_code,month,year,card_name} = req.body
     const user =req.user
     let username = user.name + '' + user.surname 
+
     Cart.findById(user.usercartid).populate({
         path: 'products',
         populate: {
@@ -31,7 +40,9 @@ module.exports.postPayment =async (req,res) =>{
         }
       })
       .exec()
-    .then(cart=>{        
+    .then(cart=>{    
+        const orderedProducts = cart.products;
+        console.log('order product bilgisi',orderedProducts)
     const basketItems = cart.products.map(item => ({
         id:1,
         name: item.urun_adi,
@@ -51,7 +62,7 @@ module.exports.postPayment =async (req,res) =>{
     
      const request = {
         locale: Iyzipay.LOCALE.TR,
-        conversationId: '123456789',
+        conversationId: conversationId,
         price: totalAmount.toFixed(2),
         paidPrice:totalAmount.toFixed(2),
         currency: Iyzipay.CURRENCY.TRY,
@@ -101,13 +112,49 @@ module.exports.postPayment =async (req,res) =>{
     };
     
     iyzipay.payment.create(request, function (err, result) {
-        console.log(err, result);
+        // console.log(err, result); iyzicodan dönen sonuç
+        const deger = result.status
+        const errorMessage  = result.errorMessage
+        console.log('değer:',deger)
         if(result.status ==="success") {
-            console.log('başarılı ödeme')
+            res.render('user/payment/succsesspage',{layout:'user/layouts/layout-payment',conversationId})
+           
+          const orderitems = new Order({
+            user:user.id,
+            products: orderedProducts.map(item => item._id),
+            price:totalAmount.toFixed(2),
+            status:'ödeme alındı',
+            shippingAddress: country + ' ' + state + ' ' + address,
+            billingAddress: country + ' ' + state + ' ' + address
+
+          })
+            orderitems.save()
+            .then(result =>
+                console.log('sipariş alındı')
+                
+            )
+
         }
+         
+        if(result.status ==='failure'){
+
+            res.render('user/payment/failurepage',{layout:'user/layouts/layout-payment',conversationId,errorMessage})
+
+
+        }
+        const paymentdata = new Payment({ 
+            sendData:request,
+            getData:result
+        })
+        paymentdata.save()
+       
 
     });
-
+          
     });
  
  }
+
+
+
+ 
