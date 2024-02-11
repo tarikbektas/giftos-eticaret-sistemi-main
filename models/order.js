@@ -6,14 +6,13 @@ const Schema = mongoose.Schema
 
 const order = new Schema ({
     conversationId :String,
-    customer:String,
     products: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'product'
       }],
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
       },
       price:String,
       status:String,

@@ -30,8 +30,7 @@
                     <td><input type="text" name="desc" class="form-control" value="<%=productitems.urun_desc  %>"></td>
                     <td><%=productitems.urun_fiyat  %></td>
                     <td style="display: flex;">
-                        <a href="product-edit/<%= productitems._id  %>"> <button type="submit" class="btn btn-outline-danger btn-xs btn-flat show_confirm" style="margin-right: 1rem;" data-toggle="tooltip">Düzenle</button></a>
-
+ 
                         <form action="delete-product" method="post">
                             <input type="hidden" name="id" value="<%= productitems._id  %>">
                             <button type="submit" class="btn btn-outline-danger btn-xs btn-flat show_confirm">sil</button>

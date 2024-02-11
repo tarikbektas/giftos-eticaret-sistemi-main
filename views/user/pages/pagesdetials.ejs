@@ -32,9 +32,11 @@
 </head>
 
 <body>
-  
-    
-  <%- page.desc  %>
+  <% page.forEach(function(pageitems) { %>
+     <%- pageitems.desc  %>
+     <% }); %>
+   
+ 
  
 
   <script src="user/js/jquery-3.4.1.min.js"></script>

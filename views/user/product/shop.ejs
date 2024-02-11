@@ -7,9 +7,10 @@
     </div>
     <div class="row">
         <% product.forEach(function(productitems) { %>
+          <h1><%=productitems._id  %></h1>
       <div class="col-sm-6 col-md-4 col-lg-3">
         <div class="box">
-          <a href="urunler/<%=productitems._id  %>">
+          <a href="urunler/<%=productitems.urun_id  %>">
             <div class="img-box">
               <img src="../admin/<%- productitems.urun_görsel  %>" alt="">
             </div>

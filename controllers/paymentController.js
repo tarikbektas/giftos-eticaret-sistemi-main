@@ -12,8 +12,17 @@ var iyzipay = new Iyzipay({
 });
 
 
-module.exports.getPayment = (req,res) =>{
-     res.render('user/payment/payment',{layout:'user/layouts/layout-payment'})
+module.exports.getPayment = async (req,res) =>{
+    const user = req.user;
+  
+  const cart =  await   Cart.findById(user.usercartid).populate('products')
+     
+        console.log('kart bilgisi',cart)
+        res.render('user/payment/payment',{layout:'user/layouts/layout-payment',cart})
+
+   
+   
+    
 }
 
 
@@ -124,8 +133,9 @@ module.exports.postPayment =async (req,res) =>{
             products: orderedProducts.map(item => item._id),
             price:totalAmount.toFixed(2),
             status:'ödeme alındı',
-            shippingAddress: country + ' ' + state + ' ' + address,
-            billingAddress: country + ' ' + state + ' ' + address
+            shippingAddress: address  + ' ' + state + ' ' + country,
+            billingAddress: address  + ' ' + state + ' ' + country,
+            conversationId:conversationId
 
           })
             orderitems.save()
@@ -157,4 +167,18 @@ module.exports.postPayment =async (req,res) =>{
 
 
 
- 
+ module.exports.updateOrderStatus = (req,res) =>{
+    const status = req.body.status
+    const orderid = req.body.orderid
+     
+    Order.findByIdAndUpdate(
+        {_id:orderid},
+        {status:status},
+        {new:true}
+        ).then(
+            res.redirect('/admin')
+
+        )
+        
+
+ }

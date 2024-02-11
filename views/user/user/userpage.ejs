@@ -1,0 +1,103 @@
+<div class="container emp-profile">
+  
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <svg style="max-width: 10rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+          </svg>
+        
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            <%=user.name  %> <%= user.surname  %>
+          </h5>
+
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Hakkımda</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Siparişler</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <div class="row">
+              <div class="col-md-6">
+                <label>İsim</label>
+              </div>
+              <div class="col-md-6">
+                <p><%=user.name %> <%= user.lastname  %></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>E-posta</label>
+              </div>
+              <div class="col-md-6">
+                <p><%=user.email  %></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Telefon Numarası</label>
+              </div>
+              <div class="col-md-6">
+                <p><%=user.phone  %></p>
+              </div>
+            </div>
+
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <% order.forEach(order => { %>
+            <table class="table">
+
+              <thead>
+
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Tarih</th>
+                  <th scope="col">Ürün İsmi</th>
+                  <th scope="col">Ürün Fiyatı</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <% order.products.forEach(product => { %>
+                <tr>
+                  <th scope="row">1</th>
+                  <td><%= order.createdAt  %></td>
+                  <td><%= product.urun_adi %></td>
+                  <td><%= product.urun_fiyat %> ₺</td>
+                </tr>
+                <% }); %>
+
+              </tbody>
+              <div>Sipariş Durumu:<%=order.status  %></div>
+
+            </table>
+            <div style="float: inline-end;font-size: large;margin-bottom: 3rem;">Toplam Fiyat : <%=order.price  %> ₺</div>
+            <% }); %>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+</div>

@@ -9,6 +9,9 @@ const Navbar= require('../models/navbar')
 const Blog = require('../models/blog')
 const Services = require('../models/services')
 const News = require('../models/news')
+const Order= require('../models/order')
+
+
 
 const path = require('path');
 const multer = require('multer')
@@ -39,12 +42,33 @@ const upload = multer({
 
 
 module.exports.getİndex = (req, res) => {
-   
-    // Render işlemi
-    res.render('admin/components/index', { layout: 'admin/layouts/layout' });
+   Order.find().populate('products').populate('user')
+   .then(orders=>{
+    const totalorders = orders.length
+    function countOrdersWithStatus(orders, targetStatus) {
+      const count = orders.reduce((accumulator, order) => {
+        if (order.status === targetStatus) {
+          return accumulator + 1;
+        }
+        return accumulator;
+      }, 0);
+    
+      return count;
+    }
+    const tamamnlanansiparis = countOrdersWithStatus(orders, 'Sipariş Tamamlandı');
+    const bekleyensiparis =countOrdersWithStatus(orders, 'ödeme alındı');
+    const kargodakisiparis =countOrdersWithStatus(orders, 'Kargoya Verildi');
+    
+    res.render('admin/components/index', { layout: 'admin/layouts/layout',orders:orders,totalorders,tamamnlanansiparis,bekleyensiparis,kargodakisiparis})
+   }
+ 
+    
+    )
+     
 
   
 }
+
 
 
 module.exports.getSetting = (req,res) =>{
@@ -183,6 +207,7 @@ module.exports.getProduct = (req,res) =>{
   })
 }
 
+ 
 
 module.exports.deleteProduct = (req,res)=>{
   const id = req.body.id

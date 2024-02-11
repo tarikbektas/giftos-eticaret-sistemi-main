@@ -1,7 +1,7 @@
 const Pages = require('../models/pages')
 const Product =require('../models/product')
 const Cart = require('../models/cart')
- 
+const Order = require('../models/order')
 
 const formValidation =require('../validation/formValidation')
 const bcrypt = require('bcrypt');
@@ -13,9 +13,10 @@ require('../authentication/passport/local')
 
 module.exports.getpages = (req,res) =>{
     const url = req.params.url
-   Pages.findOne({url})
+   
+   Pages.find({url:url})
    .then(page=>{
-    res.render('user/pages/pagesdetials',{layout:'user/layouts/layout',page:page})
+    res.render('user/pages/pagesdetials',{layout:'user/layouts/layout',page})
    })
    
   }
@@ -32,12 +33,12 @@ module.exports.getProduct = (req,res) =>{
 
 module.exports.getProductDetials = (req,res) =>{
   const id = req.params.id
-  Product.findById(id).populate('prodcats','name')
-  .then(product=>{
-
-    res.render('user/product/productdetials',{layout:'user/layouts/layouts2',product:product})
-   
-  })
+  console.log('gelen id :',id)
+ Product.find({urun_id:id}).populate('prodcats')
+ .then(product=>{
+  console.log('product bilgisi',product)
+  res.render('user/product/productdetials',{layout:'user/layouts/layouts2',product})
+ })
 }
 
  
@@ -196,3 +197,16 @@ module.exports.postUserLogout = (req, res) => {
       res.redirect('/'); // Örneğin, ana sayfaya yönlendirme
   });
 }
+
+
+
+module.exports.getProfile = (req,res) =>{
+  const user = req.user
+  
+  Order.find({user:user.id}).populate('products')
+  .then(order=>{ 
+    res.render('user/user/userpage',{layout:'user/layouts/layout4',order})
+
+  })
+}
+ 

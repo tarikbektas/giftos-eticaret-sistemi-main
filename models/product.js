@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 
 const product = new Schema({
+   urun_id:String,
    urun_barkod:String,
    urun_adi:String,
    urun_shortdesc:String,

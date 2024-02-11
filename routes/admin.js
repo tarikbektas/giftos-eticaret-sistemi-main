@@ -1,7 +1,10 @@
 const express =require('express')
 const router  =express.Router();
+const paymentConntrollers = require('../controllers/paymentController')
 const admincontrollers =require('../controllers/adminControllers')
 const mongoose = require('mongoose');
+const crypto = require('crypto');
+
 
 const Setting =require('../models/settings')
 const Slider =require('../models/slider')
@@ -135,6 +138,15 @@ router.get('/pages/:url',admincontrollers.pagesDetials)
 router.get('/add-product',admincontrollers.getAddProduct)
 router.get('/product',admincontrollers.getProduct)
 router.post('/product',upload.fields([{ name: 'image1', maxCount: 1 }]),  (req, res) => {
+  function generateRandomKey(length) {
+    return crypto.randomBytes(Math.ceil(length / 2))
+      .toString('hex') // Hexadecimal formatına çevirme
+      .slice(0, length); // Belirtilen uzunlukta kırpma
+  }
+  
+  
+  const randomKey = generateRandomKey(16);
+  const urun_id = randomKey;
   const files1 = req.files['image1'];
   const img = req.files['image1'];
   const title = req.body.title;
@@ -148,6 +160,7 @@ router.post('/product',upload.fields([{ name: 'image1', maxCount: 1 }]),  (req, 
   
   const image1Path = files1 && files1[0] ? path.join( 'uploads/', files1[0].filename) : null;
   const product = new Product({
+    urun_id:urun_id,
     urun_barkod:barcode,
     prodcats:category,
     urun_adi:title,
@@ -164,7 +177,7 @@ router.post('/product',upload.fields([{ name: 'image1', maxCount: 1 }]),  (req, 
   })
 })
 
-router.post('/delete-product',admincontrollers.deleteProduct)
+ router.post('/delete-product',admincontrollers.deleteProduct)
 
 
 
@@ -267,7 +280,7 @@ router.post('/add-news',upload.fields([{ name: 'image1', maxCount: 1 }]),  (req,
 router.get('/news/:id',admincontrollers.newsDetials)
 
  
-
+router.post('/updateorderstatus',paymentConntrollers.updateOrderStatus)
  
 
 
@@ -278,6 +291,13 @@ router.post('/test',(req,res)=>{
 
 // router.get('/test',admincontrollers.getTest)
 // router.post('/test',admincontrollers.postTest )
+
+
+
+
+
+
+
 
 
 

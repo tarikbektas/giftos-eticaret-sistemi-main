@@ -29,7 +29,7 @@ passport.use(new localsStrategy((email, password, done) => {
 
 passport.serializeUser(function(user, cb) {
     process.nextTick(function() {
-      cb(null, { id: user.id, email: user.email,name:user.name ,surname:user.lastname,userid:user._id,usercartid:user.cart,phone:user.phone});
+      cb(null, { id: user.id, email: user.email,name:user.name ,surname:user.lastname,userid:user._id,usercartid:user.cart,phone:user.phone,cartid:user.cart});
     });
   });
   

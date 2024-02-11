@@ -21,11 +21,12 @@
           <select name="is_live" class="form-control custom-select">
               <option value="1"selected="" >Pasif</option>
               <option value="0">Aktif</option>
-              <div class="col-md-6">
-                <label class="form-label">Site Kısa Açıklama:</label>
-                <input class="form-control" type="text" name="short_desc" value="<%=setting.short_desc  %>">
-              </div>
+             
           </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Site Kısa Açıklama:</label>
+          <input class="form-control" type="text" name="short_desc" value="<%=setting.short_desc  %>">
         </div>
         <%} else { %>
           <div class="col-md-3">

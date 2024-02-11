@@ -13,7 +13,7 @@ const PORT =process.env.PORT
 // modeller
 const Setting =require('./models/settings')
 const Navbar =require('./models/navbar')
-
+const Product = require('./models/product')
 
 
  
@@ -89,7 +89,14 @@ app.use((req,res,next)=>{
 })
 
 
- 
+app.get('/product',(req,res)=>{
+Product.find()
+.then(result=>{
+    res.json(result)    
+})
+
+
+})
 
   
 
@@ -107,11 +114,9 @@ app.use(ejsLayouts)
 const path = require('path');
 const { compareSync } = require('bcrypt');
 app.use(express.static(path.join(__dirname, '/public')));
- 
-
-app.use('/admin',adminrouter)
+  
 app.use('/',userrouter)
-
+app.use('/admin',adminrouter)
 
 app.listen(PORT,()=>{
     console.log("proje çalışıyor")
